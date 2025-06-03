@@ -1,0 +1,14 @@
+{
+  "books": [
+    { "id": 1, "title": "මඩොල් දූව", "author": "Martin Wickramasinghe", "price": 600, "category": "Novel" },
+    { "id": 2, "title": "නෙළුම් වැව", "author": "Martin Wickramasinghe", "price": 750, "category": "Novel" },
+    { "id": 3, "title": "සඳලි සිලුවා", "author": "Gunadasa Amarasekara", "price": 820, "category": "Novel" },
+    { "id": 4, "title": "අපේ ගම", "author": "Kumaratunga Munidasa", "price": 500, "category": "Children" },
+    { "id": 5, "title": "ගම්පෙරලිය", "author": "Martin Wickramasinghe", "price": 950, "category": "Classic" },
+    { "id": 6, "title": "කුමාරතුංග යුගය", "author": "Kumaratunga Munidasa", "price": 450, "category": "Biography" },
+    { "id": 7, "title": "චිත්තලාංකාර", "author": "W.A. Silva", "price": 700, "category": "Romance" },
+    { "id": 8, "title": "නිවන් මග", "author": "Bhikkhu Nanamoli", "price": 650, "category": "Spiritual" },
+    { "id": 9, "title": "වීර සන්ධානය", "author": "W.A. Silva", "price": 720, "category": "Historical" },
+    { "id": 10, "title": "භාවනා ක්‍රම", "author": "Henepola Gunaratana", "price": 780, "category": "Spiritual" }
+  ]
+}
