@@ -19,8 +19,9 @@ const cartRoutes = require("./routes/cart");
 
 // Use routes
 app.use("/api/auth", authRoutes);
-app.use("/api/orders", orderRoutes);
-app.use("/api/cart", cartRoutes);
+app.use('/api/cart', require('./routes/cart'));
+app.use('/api/orders', require('./routes/orders'));
+
 
 // Books API route (Google Books)
 app.get("/api/books", async (req, res) => {

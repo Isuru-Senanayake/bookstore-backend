@@ -1,36 +1,37 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const mongoose = require("mongoose");
+const Order = require('../models/Order');
+const Cart = require('../models/Cart');
+const auth = require('../middleware/auth');
 
-const orderSchema = new mongoose.Schema({
-  userId: String,
-  items: [
-    {
-      productId: String,
-      title: String,
-      price: Number,
-      quantity: Number
-    }
-  ],
-  total: Number,
-  createdAt: { type: Date, default: Date.now }
-});
+// Place order
+router.post('/', auth, async (req, res) => {
+  const { shippingAddress, paymentMethod } = req.body;
 
-const Order = mongoose.model("Order", orderSchema);
+  const cart = await Cart.findOne({ userId: req.user.id });
+  if (!cart || cart.items.length === 0) {
+    return res.status(400).json({ message: 'Cart is empty' });
+  }
 
-// Place an order
-router.post("/", async (req, res) => {
-  const { userId, items, total } = req.body;
+  const totalAmount = cart.items.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
-  const order = new Order({ userId, items, total });
+  const order = new Order({
+    userId: req.user.id,
+    items: cart.items,
+    totalAmount,
+    shippingAddress,
+    paymentMethod
+  });
+
   await order.save();
+  await Cart.findOneAndDelete({ userId: req.user.id });
 
-  res.json({ message: "Order placed", order });
+  res.json(order);
 });
 
-// Get all orders for a user
-router.get("/:userId", async (req, res) => {
-  const orders = await Order.find({ userId: req.params.userId }).sort({ createdAt: -1 });
+// Get current user's orders
+router.get('/', auth, async (req, res) => {
+  const orders = await Order.find({ userId: req.user.id }).sort({ createdAt: -1 });
   res.json(orders);
 });
 
