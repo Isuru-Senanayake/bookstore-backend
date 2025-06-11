@@ -5,12 +5,14 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const axios = require("axios");
+const bookRoutes = require('./routes/books');
 
 dotenv.config();
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use('/api/books', bookRoutes);
 
 // Import routes
 const authRoutes = require("./routes/auth");
@@ -21,7 +23,6 @@ const cartRoutes = require("./routes/cart");
 app.use("/api/auth", authRoutes);
 app.use('/api/cart', require('./routes/cart'));
 app.use('/api/orders', require('./routes/orders'));
-
 
 // Books API route (Google Books)
 app.get("/api/books", async (req, res) => {

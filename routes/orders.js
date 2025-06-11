@@ -4,6 +4,7 @@ const Order = require('../models/Order');
 const Cart = require('../models/Cart');
 const auth = require('../middleware/auth');
 
+
 // Place order
 router.post('/', auth, async (req, res) => {
   const { shippingAddress, paymentMethod } = req.body;
