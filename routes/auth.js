@@ -4,8 +4,8 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 const router = express.Router();
 
-// Signup
-router.post("/signup", async (req, res) => {
+// Register
+router.post("/register", async (req, res) => {
   const { username, email, password } = req.body;
   try {
     const existing = await User.findOne({ email });
@@ -16,6 +16,7 @@ router.post("/signup", async (req, res) => {
     await newUser.save();
     res.json({ msg: "User registered" });
   } catch (err) {
+    console.error("Login error:", err); // See real error in terminal
     res.status(500).json({ msg: "Server error" });
   }
 });
